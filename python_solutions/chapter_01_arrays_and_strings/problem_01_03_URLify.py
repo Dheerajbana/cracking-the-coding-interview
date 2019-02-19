@@ -29,27 +29,9 @@ to extend the input string by 2*N characters.
 
 
 # in Python, strings are immutable, thus we are forced to implement with lists of single characters e.g.
-def URLify(string):
-    # compute length of new string based on # of spaces in input string
-    new_len = 0
-    reader = len(string) - 1  # index at end of un-extended string
-    for char in string:
-        if char == ' ':
-            new_len += 3
-        else:
-            new_len += 1
-    # extend length of string to fit URL
-    string += [' '] * (new_len - len(string))
-    writer = len(string) - 1  # index at end of extended string
-    # traverse using double index technique to do this "in place"
-    while reader >= 0 and writer >= 0:
-        if string[reader] == ' ':  # if reader sees a space, the writer writes %20
-            string[writer] = '0'
-            string[writer - 1] = '2'
-            string[writer - 2] = '%'
-            reader -= 1  # reader and writer are advanced accordingly
-            writer -= 3
-        else:
-            string[writer] = string[reader]  # if the reader sees a non-space, the writer copies it over
-            reader -= 1  # reader and writer are advanced the same amount
-            writer -= 1
+def URLify(input_string):
+    res=""
+    a = input_string.strip().split(" ")
+    for i in a:
+        res += i+"%20"
+    return res
